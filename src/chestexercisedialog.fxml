@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ExerciseController"
+            prefHeight="400.0" prefWidth="600.0">
+    <headerText>
+        Add Exercise
+    </headerText>
+    <content>
+        <GridPane>
+            <Label text="Exercise:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <ComboBox fx:id="comboBox" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Push Ups"/>
+                        <String fx:value="Narrow Push Ups"/>
+                        <String fx:value="Wide Push Ups"/>
+                        <String fx:value="Inclined Push Ups"/>
+                        <String fx:value="Inclined Narrow Push Ups"/>
+                        <String fx:value="Inclined Wide Push Ups"/>
+                        <String fx:value="Declined Push Ups"/>
+                        <String fx:value="Declined Narrow Push Ups"/>
+                        <String fx:value="Declined Wide Push Ups"/>
+                        <String fx:value="One Arm Push Ups"/>
+                        <String fx:value="Flat Barbell Press"/>
+                        <String fx:value="Declined Barbell Press"/>
+                        <String fx:value="Inclined Barbell Press"/>
+                        <String fx:value="Flat Dumbbell Press"/>
+                        <String fx:value="Inclined Dumbbell Press"/>
+                        <String fx:value="Declined Dumbell Press"/>
+                        <String fx:value="Pec Flyes"/>
+                        <String fx:value="Flat Dumbbell Flyes"/>
+                        <String fx:value="Declined Dumbell Flyes"/>
+                        <String fx:value="Inclined Dumbell Flyes"/>
+                        <String fx:value="Tricep Extensions"/>
+                        <String fx:value="Tricep Dips"/>
+                        <String fx:value="Cable Crossovers"/>
+                        <String fx:value="Inclined Sideways One Arm Press"/>
+                        <String fx:value="Sideways One Arm Press"/>
+                        <String fx:value="Declined Sideways One Arm Press"/>
+                        <String fx:value="Inclined Chest Press"/>
+                        <String fx:value="Chest Press"/>
+                        <String fx:value="Declined Chest Press"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <Label text="Number of Reps:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="repTF" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Label text="Number of Sets:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="setTF" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            <Label text="Weight" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <TextField fx:id="weightTF" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        </GridPane>
+
+    </content>
+
+</DialogPane>

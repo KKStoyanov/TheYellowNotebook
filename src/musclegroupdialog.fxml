@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Musclegroupdialog"
+            fx:id="mainDP"
+            prefHeight="100" prefWidth="250">
+    <headerText>
+        Which muscle group are you hitting?
+    </headerText>
+    <content>
+        <ComboBox fx:id="muscleComboB">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Chest (Chest, Triceps)"/>
+                    <String fx:value="Core (Abs, Obliques)"/>
+                    <String fx:value="Arms (Biceps, Forearms, Shoulders, Lats, Upper Back)"/>
+                    <String fx:value="Legs (Calves, Quads, Glutes, Lower Back, Shins)" />
+                    <String fx:value="Cardio" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+    </content>
+
+</DialogPane>
