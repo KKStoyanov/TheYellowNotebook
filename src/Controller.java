@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -24,6 +25,8 @@ public class Controller {
 
     @FXML
     private BorderPane mainBorderPane;
+    
+    private GridPane gridPane;
 
     @FXML
     private ListView<Day> dayListView;
@@ -51,7 +54,7 @@ public class Controller {
     private Label titleLabel;
 
     public void initialize() {
-        achievedColumn.setStyle("-fx-alignment: CENTER;"); //places the checkbox in the center of the column
+       // achievedColumn.setStyle("-fx-alignment: CENTER;"); //places the checkbox in the center of the column
 
 
         dayContextMenu = new ContextMenu();
@@ -70,10 +73,12 @@ public class Controller {
             @Override
             public void changed(ObservableValue<? extends Day> observable, Day oldValue, Day newValue) {
                 if (newValue != null) { //this checks that what we are clicking in the ListView is not null
-                    Day day = dayListView.getSelectionModel().getSelectedItem(); //the day that is selected on the listView
-                    exerciseTableView.setItems(day.getExercises()); //setting the exercises in the exercise tableView
-                    goalTableView.setItems(day.getGoals()); //setting the goals in the goal tableView
-                    titleLabel.setText(day.toString());
+                	System.out.println("in here");
+                	mainBorderPane.setCenter(createGridPane());
+//                    Day day = dayListView.getSelectionModel().getSelectedItem(); //the day that is selected on the listView
+//                    exerciseTableView.setItems(day.getExercises()); //setting the exercises in the exercise tableView
+//                    goalTableView.setItems(day.getGoals()); //setting the goals in the goal tableView
+//                    titleLabel.setText(day.toString());
                 }
             }
         });
@@ -114,7 +119,7 @@ public class Controller {
         });
 
         //similar to deleting day in listView
-        exerciseTableView.setRowFactory(new Callback<TableView<Exercise>, TableRow<Exercise>>() {
+      /*  exerciseTableView.setRowFactory(new Callback<TableView<Exercise>, TableRow<Exercise>>() {
             @Override
             public TableRow<Exercise> call(TableView<Exercise> param) {
                 TableRow<Exercise> row = new TableRow<Exercise>();
@@ -168,7 +173,7 @@ public class Controller {
                 row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu) null).otherwise(goalTVContextMenu));
                 return row;
             }
-        });
+        });*/
 
         dayListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
@@ -205,9 +210,11 @@ public class Controller {
 
     @FXML
     public void handleClickListView() {
-        Day day = dayListView.getSelectionModel().getSelectedItem(); //the day that is selected on the listView
-        exerciseTableView.setItems(day.getExercises()); //setting the exercises in the exercise tableView
-        goalTableView.setItems(day.getGoals()); //setting the goals in the goal tableView
+    	System.out.println("in here");
+    	mainBorderPane.setCenter(new Label("Hello"));
+        //Day day = dayListView.getSelectionModel().getSelectedItem(); //the day that is selected on the listView
+        //exerciseTableView.setItems(day.getExercises()); //setting the exercises in the exercise tableView
+        //goalTableView.setItems(day.getGoals()); //setting the goals in the goal tableView
     }
 
     @FXML
@@ -393,6 +400,13 @@ public class Controller {
         } else path = "cardioexercisedialog.fxml";
 
         return path;
+    }
+    
+    public GridPane createGridPane() {
+    	gridPane = new GridPane();
+    	gridPane.addRow(0, new Label("Hello"));
+    	gridPane.addRow(1, new Label("bye"));
+    	return gridPane;
     }
 
     public void showExerciseStatistics() {
