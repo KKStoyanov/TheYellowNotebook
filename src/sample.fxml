@@ -14,85 +14,93 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.text.Font?>
 <BorderPane fx:id="mainBorderPane" fx:controller="Controller"
-            xmlns:fx="http://javafx.com/fxml">
-    <top>
-        <MenuBar>
-            <Menu text="File">
-                <items>
-                    <MenuItem text="Add Date" onAction="#addDate"/>
-                    <SeparatorMenuItem/>
-                    <MenuItem text="Exit"/>
-                </items>
-            </Menu>
-            <Menu text="Statistics">
-                <items>
-                    <MenuItem text="See Exercise Statistics" onAction="#showExerciseStatistics"/>
-                </items>
-            </Menu>
-            <Menu text="Settings">
-
-            </Menu>
-        </MenuBar>
-    </top>
-    <left>
-        <ListView fx:id="dayListView">
-        </ListView>
-    </left>
-<!--     <center> -->
-<!--         <GridPane > -->
-<!--             <Label fx:id="titleLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"> -->
-<!--                 <font> -->
-<!--                     <Font name="Arial Black" size="24"/> -->
-<!--                 </font> -->
-<!--             </Label> -->
-<!--             <Label text="Exercises" GridPane.rowIndex="1" GridPane.columnIndex="0"/> -->
-<!--             <TableView fx:id="exerciseTableView" GridPane.rowIndex="2" GridPane.columnIndex="0" prefWidth="1000"> -->
-<!--                 <columnResizePolicy> -->
-<!--                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/> -->
-<!--                 </columnResizePolicy> -->
-<!--                 <columns> -->
-<!--                     <TableColumn text="Exercise"> -->
-<!--                         <cellValueFactory> -->
-<!--                             <PropertyValueFactory property="name"/> -->
-<!--                         </cellValueFactory> -->
-<!--                     </TableColumn> -->
-<!--                     <TableColumn text="Reps"> -->
-<!--                         <cellValueFactory> -->
-<!--                             <PropertyValueFactory property="reps"/> -->
-<!--                         </cellValueFactory> -->
-<!--                     </TableColumn> -->
-<!--                     <TableColumn text="Sets"> -->
-<!--                         <cellValueFactory> -->
-<!--                             <PropertyValueFactory property="sets"/> -->
-<!--                         </cellValueFactory> -->
-<!--                     </TableColumn> -->
-<!--                     <TableColumn text="Weight"> -->
-<!--                         <cellValueFactory> -->
-<!--                             <PropertyValueFactory property="weight"/> -->
-<!--                         </cellValueFactory> -->
-<!--                     </TableColumn> -->
-<!--                 </columns> -->
-<!--             </TableView> -->
-<!--             <Button onAction="#addExercise" text="Add Exercise" GridPane.columnIndex="0" GridPane.rowIndex="3"/> -->
-<!--             <Label text="Goals" GridPane.rowIndex="4" GridPane.columnIndex="0"/> -->
-<!--             <TableView fx:id="goalTableView" GridPane.columnIndex="0" GridPane.rowIndex="5"> -->
-<!--                 <columnResizePolicy> -->
-<!--                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/> -->
-<!--                 </columnResizePolicy> -->
-<!--                 <columns> -->
-<!--                 <TableColumn fx:id="achievedColumn" text="Achieved" prefWidth="100" maxWidth="150"> -->
-<!--                     <cellValueFactory> -->
-<!--                         <PropertyValueFactory property="achieved"/> -->
-<!--                     </cellValueFactory> -->
-<!--                 </TableColumn> -->
-<!--                     <TableColumn text="Description" prefWidth="400" maxWidth="1000"> -->
-<!--                         <cellValueFactory> -->
-<!--                             <PropertyValueFactory property="description"/> -->
-<!--                         </cellValueFactory> -->
-<!--                     </TableColumn> -->
-<!--                 </columns> -->
-<!--             </TableView> -->
-<!--             <Button onAction="#addGoal" text="Add Goal" GridPane.columnIndex="0" GridPane.rowIndex="6"/> -->
-<!--         </GridPane> -->
-<!--     </center> -->
+	xmlns:fx="http://javafx.com/fxml">
+	<top>
+		<MenuBar>
+			<Menu text="File">
+				<items>
+					<MenuItem text="Add Date" onAction="#addDate" />
+					<SeparatorMenuItem />
+					<MenuItem text="Exit" />
+				</items>
+			</Menu>
+			<Menu text="Statistics">
+				<items>
+					<MenuItem text="See Statistics" onAction="#showExerciseStatistics" />
+				</items>
+			</Menu>
+			<Menu text="Settings">
+				<items>
+					<MenuItem text="Add Exercise" onAction="#addNewExercise" />
+					<SeparatorMenuItem />
+					<MenuItem text="Remove Exercise" onAction="#removeUnusedExercise" />
+				</items>
+			</Menu>
+		</MenuBar>
+	</top>
+	<left>
+		<ListView fx:id="dayListView">
+		</ListView>
+	</left>
+	<!-- <center> -->
+	<!-- <GridPane > -->
+	<!-- <Label fx:id="titleLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"> -->
+	<!-- <font> -->
+	<!-- <Font name="Arial Black" size="24"/> -->
+	<!-- </font> -->
+	<!-- </Label> -->
+	<!-- <Label text="Exercises" GridPane.rowIndex="1" GridPane.columnIndex="0"/> -->
+	<!-- <TableView fx:id="exerciseTableView" GridPane.rowIndex="2" GridPane.columnIndex="0" 
+		prefWidth="1000"> -->
+	<!-- <columnResizePolicy> -->
+	<!-- <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/> -->
+	<!-- </columnResizePolicy> -->
+	<!-- <columns> -->
+	<!-- <TableColumn text="Exercise"> -->
+	<!-- <cellValueFactory> -->
+	<!-- <PropertyValueFactory property="name"/> -->
+	<!-- </cellValueFactory> -->
+	<!-- </TableColumn> -->
+	<!-- <TableColumn text="Reps"> -->
+	<!-- <cellValueFactory> -->
+	<!-- <PropertyValueFactory property="reps"/> -->
+	<!-- </cellValueFactory> -->
+	<!-- </TableColumn> -->
+	<!-- <TableColumn text="Sets"> -->
+	<!-- <cellValueFactory> -->
+	<!-- <PropertyValueFactory property="sets"/> -->
+	<!-- </cellValueFactory> -->
+	<!-- </TableColumn> -->
+	<!-- <TableColumn text="Weight"> -->
+	<!-- <cellValueFactory> -->
+	<!-- <PropertyValueFactory property="weight"/> -->
+	<!-- </cellValueFactory> -->
+	<!-- </TableColumn> -->
+	<!-- </columns> -->
+	<!-- </TableView> -->
+	<!-- <Button onAction="#addExercise" text="Add Exercise" GridPane.columnIndex="0" 
+		GridPane.rowIndex="3"/> -->
+	<!-- <Label text="Goals" GridPane.rowIndex="4" GridPane.columnIndex="0"/> -->
+	<!-- <TableView fx:id="goalTableView" GridPane.columnIndex="0" GridPane.rowIndex="5"> -->
+	<!-- <columnResizePolicy> -->
+	<!-- <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/> -->
+	<!-- </columnResizePolicy> -->
+	<!-- <columns> -->
+	<!-- <TableColumn fx:id="achievedColumn" text="Achieved" prefWidth="100" 
+		maxWidth="150"> -->
+	<!-- <cellValueFactory> -->
+	<!-- <PropertyValueFactory property="achieved"/> -->
+	<!-- </cellValueFactory> -->
+	<!-- </TableColumn> -->
+	<!-- <TableColumn text="Description" prefWidth="400" maxWidth="1000"> -->
+	<!-- <cellValueFactory> -->
+	<!-- <PropertyValueFactory property="description"/> -->
+	<!-- </cellValueFactory> -->
+	<!-- </TableColumn> -->
+	<!-- </columns> -->
+	<!-- </TableView> -->
+	<!-- <Button onAction="#addGoal" text="Add Goal" GridPane.columnIndex="0" 
+		GridPane.rowIndex="6"/> -->
+	<!-- </GridPane> -->
+	<!-- </center> -->
 </BorderPane>

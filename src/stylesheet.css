@@ -1,0 +1,137 @@
+Button {
+	-fx-text-fill: gold;
+	-fx-border-radius: 5;
+	-fx-padding: 6 6 6 6;
+	-fx-font: 16px "Serif";
+	-fx-background-color: black;
+	-fx-text-alignment:CENTER;
+	-fx-pref-width:100px;
+}
+
+/*.button1 {
+    -fx-font: 16px "Serif";
+    -fx-padding: 10;
+    -fx-background-color: black;
+} */
+
+.root{
+	-fx-background-color: gold;
+	}
+
+/*look of the overall tableview */	
+.table-view{
+   -fx-background-color: ivory;
+   -fx-border-color: black;
+   -fx-padding: 0;
+   -fx-border-width:3;
+   -fx-table-cell-border-color: transparent;/*gets rid of the lines between the columns */
+}
+
+.table-view Label{
+	-fx-border-width:0;
+}
+
+/*individual cell of the tableview */
+.table-view .table-cell {
+    -fx-text-fill: black;
+    -fx-alignment: CENTER;
+    -fx-text-alignment:CENTER;
+}
+
+/*row of the table view */
+.table-view .table-row-cell {
+	-fx-background-color: ivory;
+}
+/*selected row of the tableview */
+.table-view:focused .table-row-cell:selected{
+    -fx-background-color: paleturquoise;
+}
+
+/*the column header of the tableview */
+.table-view .column-header {
+	-fx-border-color: black;
+    -fx-background-color: black;
+}
+
+/*the label inside of the cloumn header of the tableview */
+.table-view .column-header-background .label{
+	-fx-text-fill: ivory;
+	-fx-font: 15px "Arial Black";
+	-fx-underline:true;
+	-fx-background-color:transparent;
+}
+
+.list-view .list-cell:even {
+	-fx-background-color: ivory;
+	-fx-text-fill: black;
+}
+
+.list-view .list-cell:odd {
+	-fx-background-color: ivory;
+	-fx-text-fill: black;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: paleturquoise;
+}
+
+#dateLabel{
+	-fx-font: 35px "Arial Black";
+	-fx-underline: false;
+	-fx-border-width:0 0 3 0;
+	-fx-border-color:black;
+	-fx-padding: 0 0 0 80;
+}	
+
+Label{
+	-fx-font: 20px "Arial Black";	
+	/*-fx-background-color:coral;
+	-fx-border-width:3;
+	-fx-border-color:black;*/
+}
+
+#text{ /*this will put the text of the description to the left of the cell */
+	-fx-text-alignment: LEFT;
+}
+
+#ta{
+	-fx-background-color:ivory;
+	-fx-border-color:black;
+	-fx-border-width:3;
+	-fx-font: 20px "Times New Roman";
+}
+
+#ta Text{
+	-fx-text-alignment:LEFT;
+}
+
+Text{ 
+	-fx-text-alignment: CENTER;
+}
+
+TextField{
+	-fx-background-color:ivory;
+}
+
+ComboBox{
+	-fx-background-color:black;
+}
+
+ComboBox .cell{
+	-fx-text-fill:gold;
+}
+
+ComboBox .arrow-button{
+	-fx-background-color:black;
+}
+
+ComboxBox .arrow{
+	-fx-background-color:gold;
+}
+
+CheckBox .box{
+	-fx-background-color:red;
+	/*-fx-border-color:black;*/
+	/*-fx-border-width:3;*/
+	/*-fx-padding:15;*/
+}

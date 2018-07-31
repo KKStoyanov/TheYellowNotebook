@@ -19,10 +19,11 @@
         <ComboBox fx:id="muscleComboB">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Chest (Chest, Triceps)"/>
-                    <String fx:value="Core (Abs, Obliques)"/>
-                    <String fx:value="Arms (Biceps, Forearms, Shoulders, Lats, Upper Back)"/>
-                    <String fx:value="Legs (Calves, Quads, Glutes, Lower Back, Shins)" />
+                    <String fx:value="Chest"/>
+                    <String fx:value="Core"/>
+                    <String fx:value="Arms"/>
+                    <String fx:value="Legs" />
+                    <String fx:value="Back" />
                     <String fx:value="Cardio" />
                 </FXCollections>
             </items>

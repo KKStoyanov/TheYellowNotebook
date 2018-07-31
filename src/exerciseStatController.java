@@ -17,6 +17,12 @@ public class exerciseStatController {
 
     @FXML
     private Label squatLabel;
+    
+    @FXML
+    private Label goalLabel;
+    
+    @FXML
+    private Label goalLabel2;
 
     private Statistics statistics;
 
@@ -27,5 +33,7 @@ public class exerciseStatController {
         dBenchLabel.setText(statistics.getMaxDeclineBench(data));
         iBenchLabel.setText(statistics.getMaxInclineBench(data));
         squatLabel.setText(statistics.getMaxSquat(data));
+        goalLabel.setText(statistics.totalAchievedGoals(data));
+        goalLabel2.setText(statistics.totalFailedGoals(data));
     }
 }

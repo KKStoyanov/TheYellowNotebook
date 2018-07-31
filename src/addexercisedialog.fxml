@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<?import javafx.collections.FXCollections?>
+
+<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+	fx:controller="addNewExerciseController" prefHeight="300.0" prefWidth="400.0">
+	<headerText>
+		Add Exercise
+	</headerText>
+	<content>
+		<GridPane hgap="10" vgap="10">
+			<padding>
+				<Insets top="25" right="25" bottom="10" left="25" />
+			</padding>
+			<Label text="Category:" GridPane.columnIndex="0"
+				GridPane.rowIndex="0" />
+			<ComboBox fx:id="comboBox" GridPane.rowIndex="0"
+				GridPane.columnIndex="1" GridPane.columnSpan="2">
+				<items>
+					<FXCollections fx:factory="observableArrayList">
+						<String fx:value="Chest" />
+						<String fx:value="Core" />
+						<String fx:value="Arms" />
+						<String fx:value="Back" />
+						<String fx:value="Legs" />
+						<String fx:value="Cardio" />
+					</FXCollections>
+				</items>
+			</ComboBox>
+			<Label text="Name of Exercise:" GridPane.columnIndex="0"
+				GridPane.rowIndex="1" />
+			<TextField fx:id="exerciseTF" GridPane.rowIndex="1"
+				GridPane.columnIndex="1" GridPane.columnSpan="2" />
+		</GridPane>
+	</content>
+</DialogPane>
+

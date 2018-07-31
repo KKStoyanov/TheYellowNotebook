@@ -12,8 +12,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        setUserAgentStylesheet(STYLESHEET_CASPIAN);
+        root.getStylesheets().add("stylesheet.css");
         primaryStage.setTitle("The Yellow Notebook");
-        primaryStage.setScene(new Scene(root, 750, 600));
+        primaryStage.setScene(new Scene(root, 850, 850));
+        //primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -27,7 +30,7 @@ public class Main extends Application {
         try{
             DailyData.getInstance().saveDailyData();
         }catch (IOException e){
-            System.out.println(e.getMessage());
+           System.out.println(e.getMessage());
         }
     }
 

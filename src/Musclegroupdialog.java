@@ -21,7 +21,7 @@ public class Musclegroupdialog {
     @FXML
     private DialogPane mgDialog;
 
-    private Exercises exercises;
+    private ExerciseData exercises;
 
     private DailyData data;
 
@@ -29,21 +29,28 @@ public class Musclegroupdialog {
 
     }
 
-    public String getCorrectPath() {
-        String properDialog = "";
-        if(muscleComboB.getSelectionModel().getSelectedItem().equals("Chest (Chest, Triceps)")){
-            properDialog = "chestexercisedialog.fxml";
-        } else if (muscleComboB.getSelectionModel().getSelectedItem().equals("Core (Abs, Obliques)")) {
-            properDialog = "abexercisedialog.fxml";
-        } else if (muscleComboB.getSelectionModel().getSelectedItem().equals("Arms (Biceps, Forearms, Shoulders, Lats, Upper Back)")) {
-            properDialog = "armexercisedialog.fxml";
-        } else if (muscleComboB.getSelectionModel().getSelectedItem().equals("Legs (Calves, Quads, Glutes, Lower Back, Shins)")) {
-            properDialog = "legexercisedialog.fxml";
+    public String determineCategory() {
+        String category = "";
+        if(muscleComboB.getSelectionModel().getSelectedItem().equals("Chest")){
+            category = "P";
+        } else if (muscleComboB.getSelectionModel().getSelectedItem().equals("Core")) {
+            category = "C";
+        } else if (muscleComboB.getSelectionModel().getSelectedItem().equals("Arms")) {
+            category = "A";
+        } else if (muscleComboB.getSelectionModel().getSelectedItem().equals("Legs")) {
+            category = "L";
+        } else if (muscleComboB.getSelectionModel().getSelectedItem().equals("Back")) {
+            category = "B";
         } else if (muscleComboB.getSelectionModel().getSelectedItem().equals("Cardio")) {
-            properDialog = "cardioexercisedialog.fxml";
+            category = "H";
         }
-        return properDialog;
+        return category;
     }
+    
+    public boolean safeToProceed() {
+    	return !muscleComboB.getSelectionModel().isEmpty();
+    }
+    
     public ComboBox<String> getMuscleComboB() {
         return muscleComboB;
     }
