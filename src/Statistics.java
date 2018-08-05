@@ -1,6 +1,98 @@
 import java.time.LocalDate;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Statistics {
+	
+	private StringFunctions sF = new StringFunctions();
+
+	public SimpleStringProperty getMaxReps(String name) {
+		SimpleStringProperty repsP = new SimpleStringProperty("");
+		int maxReps = 0;
+		for (Day day : DailyData.getInstance().getDays()) { // looping through all the days
+			for (Exercise exercise : day.getExercises()) { // looping through all the exercises in each day
+				if (exercise.getName().replaceAll("\\s", "").equalsIgnoreCase(name.replaceAll("\\s", ""))) { // finding the push up exercise
+					int reps = Integer.valueOf(validateNumber(exercise.getReps())); // checking if its reps are greater
+																					// than the current
+					// reps
+					if (reps > maxReps) {
+						maxReps = reps; // setting the new max
+					}
+				}
+			}
+		}
+		repsP.set(changeToProperString(String.valueOf(maxReps)));
+		return repsP;
+	}
+
+	public SimpleStringProperty getTotalReps(String name) {
+		SimpleStringProperty repsP = new SimpleStringProperty("");
+		int totalReps = 0;
+		for (Day day : DailyData.getInstance().getDays()) { // looping through all the days
+			for (Exercise exercise : day.getExercises()) { // looping through all the exercises in each day
+				if (exercise.getName().replaceAll("\\s", "").equalsIgnoreCase(name.replaceAll("\\s", ""))) { // finding the push up exercise
+					totalReps += (Integer.valueOf(validateNumber(exercise.getReps()))
+							* Integer.valueOf(validateNumber(exercise.getSets())));
+				}
+			}
+		}
+		repsP.set(changeToProperString(String.valueOf(totalReps)));
+		return repsP;
+	}
+
+	public SimpleStringProperty getMaxWeight(String name) {
+		SimpleStringProperty weightP = new SimpleStringProperty("");
+		int maxWeight = 0;
+		for (Day day : DailyData.getInstance().getDays()) { // looping through all the days
+			for (Exercise exercise : day.getExercises()) { // looping through all the exercises in each day
+				if (exercise.getName().replaceAll("\\s", "").equalsIgnoreCase(name.replaceAll("\\s", ""))) { // finding the push up exercise
+					int weight = Integer.valueOf(sF.digitOnlyString(validateNumber(exercise.getWeight())));
+
+					if (weight > maxWeight) {
+						maxWeight = weight;
+					}
+				}
+			}
+		}
+		weightP.set(changeToProperString(String.valueOf(maxWeight)));
+		return weightP;
+	}
+
+	public SimpleStringProperty getBestTime(String name) {
+		SimpleStringProperty timeP = new SimpleStringProperty("");
+		String time = "";
+		for (Day day : DailyData.getInstance().getDays()) { // looping through all the days
+			for (Exercise exercise : day.getExercises()) { // looping through all the exercises in each day
+				if (exercise.getName().replaceAll("\\s", "").equalsIgnoreCase(name.replaceAll("\\s", ""))) { // finding the push up exercise
+					if (!exercise.getTime().equals("N/A")) {
+						if (time.equals("")) {
+							time = exercise.getTime();
+						} else {
+							if (time.compareTo(exercise.getTime()) > 0) {
+								time = exercise.getTime();
+							}
+						}
+					}
+				}
+			}
+		}
+		timeP.set(changeToProperString(String.valueOf(time)));
+		return timeP;
+	}
+
+	public String validateNumber(String entry) {
+		if (entry.equals("N/A") || entry.equals("Out of Range")) {
+			entry = "0";
+		}
+		return entry;
+	}
+	
+	public String changeToProperString(String x) {
+		if(x.equals("0") || x.equals("")) {
+			x = "N/A";
+		}
+		return x;
+	}
 
 	public String getMaxPushUps(DailyData data) {
 		int maxPushUps = 0;
@@ -69,7 +161,8 @@ public class Statistics {
 			for (Exercise exercise : day.getExercises()) {
 				if (exercise.getName().equals("Squats")) {
 					if (!(exercise.getWeight().equals("N/A") || exercise.getWeight().equals("Out of Range"))) {
-						int weight = Integer.valueOf(exercise.getWeight().substring(0, exercise.getWeight().length() - 2));
+						int weight = Integer
+								.valueOf(exercise.getWeight().substring(0, exercise.getWeight().length() - 2));
 						if (weight > maxSquat) {
 							maxSquat = weight;
 						}
@@ -79,28 +172,32 @@ public class Statistics {
 		}
 		return String.valueOf(maxSquat);
 	}
-	
-	public String totalAchievedGoals(DailyData data) {
+
+	public SimpleStringProperty totalAchievedGoals() {
+		SimpleStringProperty successP = new SimpleStringProperty("");
 		int totalAchievedGoals = 0;
-		for(Day day : data.getDays()) {
-			for(Goal goal : day.getGoals()) {
-				if(goal.isAchieved().isSelected()) {
+		for (Day day : DailyData.getInstance().getDays()) {
+			for (Goal goal : day.getGoals()) {
+				if (goal.isAchieved().isSelected()) {
 					totalAchievedGoals += 1;
 				}
 			}
 		}
-		return String.valueOf(totalAchievedGoals);
+		successP.set(String.valueOf(totalAchievedGoals));
+		return successP;
 	}
-	
-	public String totalFailedGoals(DailyData data) {
+
+	public SimpleStringProperty totalFailedGoals() {
+		SimpleStringProperty failedP = new SimpleStringProperty("");
 		int totalFailedGoals = 0;
-		for(Day day : data.getDays()) {
-			for(Goal goal : day.getGoals()) {
-				if(!goal.isAchieved().isSelected() && day.getDate().compareTo(LocalDate.now()) < 0) {
+		for (Day day : DailyData.getInstance().getDays()) {
+			for (Goal goal : day.getGoals()) {
+				if (!goal.isAchieved().isSelected() && day.getDate().compareTo(LocalDate.now()) < 0) {
 					totalFailedGoals += 1;
 				}
 			}
 		}
-		return String.valueOf(totalFailedGoals);
+		failedP.set(String.valueOf(totalFailedGoals));
+		return failedP;
 	}
 }

@@ -14,6 +14,7 @@ public class Day implements Serializable{
     private LocalDate date;
     private ObservableList<Task> tasks;
     private SimpleStringProperty notes = new SimpleStringProperty("");
+    private int id;
 
     public Day(ObservableList<Exercise> exercises, ObservableList<Goal> goals, LocalDate date, ObservableList<Task> tasks, String notes){
         this.exercises = exercises;

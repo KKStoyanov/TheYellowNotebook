@@ -374,8 +374,7 @@ public class Controller {
 		dialog.initOwner(mainBorderPane.getScene().getWindow());
 		dialog.setTitle("Edit Exercise");
 		FXMLLoader fxmlLoader = new FXMLLoader();
-		String path = determinePath(exercise.getCategory());
-		fxmlLoader.setLocation(getClass().getResource(path));
+		fxmlLoader.setLocation(getClass().getResource("exercisedialog.fxml"));
 		try {
 			dialog.getDialogPane().setContent(fxmlLoader.load());
 		} catch (IOException e) {
@@ -650,7 +649,7 @@ public class Controller {
 			}
 		});
 
-		//sortedGoals.comparatorProperty().bind(goalTableView.comparatorProperty());
+		// sortedGoals.comparatorProperty().bind(goalTableView.comparatorProperty());
 
 		SortedList<Task> sortedTasks = new SortedList<Task>(day.getTasks(), new Comparator<Task>() {
 			@Override
@@ -659,7 +658,7 @@ public class Controller {
 			}
 		});
 
-		//sortedTasks.comparatorProperty().bind(taskTableView.comparatorProperty());
+		// sortedTasks.comparatorProperty().bind(taskTableView.comparatorProperty());
 
 		exerciseTableView.setItems(day.getExercises()); // setting the exercises in the exercise tableView
 		goalTableView.setItems(sortedGoals); // setting the goals in the goal tableView
@@ -872,7 +871,7 @@ public class Controller {
 	}
 
 	public void showExerciseStatistics() {
-		Dialog<ButtonType> dialog = new Dialog<>();
+		Dialog<ButtonType> dialog = new Dialog<ButtonType>();
 		dialog.initOwner(mainBorderPane.getScene().getWindow());
 		dialog.setTitle("Exercise Statistics");
 		FXMLLoader fxmlLoader = new FXMLLoader();
@@ -880,16 +879,12 @@ public class Controller {
 		try {
 			dialog.getDialogPane().setContent(fxmlLoader.load());
 		} catch (IOException e) {
+			System.out.println("Couldn't load the exercise dialog");
 			e.printStackTrace();
 			return;
 		}
-		dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-		exerciseStatController controller = fxmlLoader.getController();
-		controller.processDialog(DailyData.getInstance());
+		dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 		Optional<ButtonType> result = dialog.showAndWait();
-		if (result.isPresent() && result.get() == ButtonType.OK) {
-			dialog.close();
-		}
 	}
 
 	public void addNewExercise() {
@@ -905,11 +900,12 @@ public class Controller {
 			return;
 		}
 		dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-		dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+		dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 		addNewExerciseController controller = fxmlLoader.getController();
 		Optional<ButtonType> result = dialog.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
 			controller.processResults(ExerciseData.getInstance());
+			addNewExercise();
 		}
 	}
 
@@ -955,5 +951,24 @@ public class Controller {
 				controller.processResults(ExerciseData.getInstance(), category);
 			}
 		}
+	}
+	
+	public void showGoalStatistics() {
+		Dialog<ButtonType> dialog = new Dialog<ButtonType>();
+		dialog.initOwner(mainBorderPane.getScene().getWindow());
+		dialog.setTitle("Goal Statistics");
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("goalstatdialog.fxml"));
+		try {
+			dialog.getDialogPane().setContent(fxmlLoader.load());
+		} catch (IOException e) {
+			System.out.println("Couldn't load the exercise dialog");
+			e.printStackTrace();
+			return;
+		}
+		dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+		goalStatController controller = fxmlLoader.getController();
+		controller.updateStats();
+		Optional<ButtonType> result = dialog.showAndWait();
 	}
 }

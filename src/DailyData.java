@@ -13,6 +13,14 @@ import java.util.Iterator;
 import java.util.List;
 
 public class DailyData {
+	public static final String DB_NAME = "days.db";
+
+	public static final String CONNECTION_STRING = "jdbc:sqlite:C:\\Users\\BGking45\\Desktop\\YNWorkspace\\TheYellowNotebook\\src\\"
+			+ DB_NAME;
+
+	public static final String TABLE_DAYS = "days";
+	public static final String COLUMN_DATE = "date";
+	
 	private static DailyData instance = new DailyData();
 
 	private ObservableList<Day> days;
