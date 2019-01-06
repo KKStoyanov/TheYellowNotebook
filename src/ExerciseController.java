@@ -1,4 +1,6 @@
 
+import java.time.LocalDate;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -52,7 +54,7 @@ public class ExerciseController {
 		}
 	}
 
-	public Exercise processResults(String category) {
+	public Exercise processResults(String category, LocalDate date) {
 		String name = comboBox.getSelectionModel().getSelectedItem();
 
 		String reps = "N/A";
@@ -75,7 +77,7 @@ public class ExerciseController {
 		String second = sFunctions.editString(secondTF.getText());
 		String time = sFunctions.stringForDuration(hour, minute, second);
 
-		Exercise newExercise = new Exercise(name, reps, sets, weight, time, category);
+		Exercise newExercise = new Exercise(name, reps, sets, weight, time, category, date);
 		return newExercise;
 	}
 

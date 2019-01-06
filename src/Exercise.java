@@ -2,6 +2,7 @@
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Exercise implements Serializable {
 
@@ -11,14 +12,16 @@ public class Exercise implements Serializable {
 	private SimpleStringProperty weight = new SimpleStringProperty("");
 	private SimpleStringProperty time = new SimpleStringProperty("");
 	private String category;
+	private LocalDate date;
 	private StringFunctions stringFunctions = new StringFunctions();
 
-	public Exercise(String name, String reps, String sets, String weight, String time, String category) {
+	public Exercise(String name, String reps, String sets, String weight, String time, String category, LocalDate date) {
 		this.name.set(name);
 		this.reps.set(reps);
 		this.sets.set(sets);
 		this.weight.set(weight);
 		this.time.set(time);
+		this.date = date;
 		this.category = category;
 
 	}
@@ -104,5 +107,13 @@ public class Exercise implements Serializable {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
+	 public LocalDate getDate() {
+	        return date;
+	    }
+
+	    public void setDate(LocalDate date) {
+	        this.date = date;
+	    }
 
 }

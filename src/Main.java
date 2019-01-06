@@ -30,24 +30,21 @@ public class Main extends Application {
 
     @Override
     public void stop() throws Exception{
-        try{
-        	ExerciseData.getInstance().close();
-            DailyData.getInstance().saveDailyData();
-        }catch (IOException e){
-           System.out.println(e.getMessage());
-        }
+        ExerciseData.getInstance().close();
+		DailyData.getInstance().close();
+		//DailyData.getInstance().saveDailyData();
     }
 
     @Override
     public void init() throws Exception{
-        try{
-        	if(!ExerciseData.getInstance().open()) {
-        		System.out.println("FATAL ERROR");
-        		Platform.exit();
-        	}
-            DailyData.getInstance().loadDailyData();
-        }catch (IOException e){
-            System.out.println(e.getMessage());
-        }
+        if(!ExerciseData.getInstance().open()) {
+			System.out.println("FATAL ERROR");
+			Platform.exit();
+		}
+		if(!DailyData.getInstance().open()) {
+			System.out.println("FATAL ERROR");
+			Platform.exit();
+		}
+         // DailyData.getInstance().loadDailyData();
     }
 }

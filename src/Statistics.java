@@ -178,7 +178,7 @@ public class Statistics {
 		int totalAchievedGoals = 0;
 		for (Day day : DailyData.getInstance().getDays()) {
 			for (Goal goal : day.getGoals()) {
-				if (goal.isAchieved().isSelected()) {
+				if (goal.getCheckedOff()) {
 					totalAchievedGoals += 1;
 				}
 			}
@@ -192,7 +192,7 @@ public class Statistics {
 		int totalFailedGoals = 0;
 		for (Day day : DailyData.getInstance().getDays()) {
 			for (Goal goal : day.getGoals()) {
-				if (!goal.isAchieved().isSelected() && day.getDate().compareTo(LocalDate.now()) < 0) {
+				if (!goal.getCheckedOff() && day.getDate().compareTo(LocalDate.now()) < 0) {
 					totalFailedGoals += 1;
 				}
 			}

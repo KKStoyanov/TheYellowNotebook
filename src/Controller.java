@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -20,6 +21,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Control;
 import javafx.scene.control.Dialog;
@@ -36,6 +38,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
@@ -267,8 +270,8 @@ public class Controller {
 			Optional<ButtonType> result1 = dialog1.showAndWait();
 			if (result1.isPresent() && result1.get() == ButtonType.OK) {
 				if (!exerciseController.containsEmptyFields()) { // look into this
-					Exercise newExercise = exerciseController.processResults(category);
-					selectedDay.addExercise(newExercise);
+					Exercise newExercise = exerciseController.processResults(category, selectedDay.getDate());
+					DailyData.getInstance().addExerciseToDay(selectedDay, newExercise);
 				}
 			}
 		}
@@ -294,8 +297,8 @@ public class Controller {
 		Optional<ButtonType> result = dialog.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
 			if (!controller.containsEmptyTextArea()) {
-				Goal goal = controller.processResults();
-				selectedDay.addGoal(goal);
+				Goal goal = controller.processResults(selectedDay.getDate());
+				DailyData.getInstance().addGoalToDay(selectedDay, goal);
 			}
 		}
 	}
@@ -418,6 +421,8 @@ public class Controller {
 		Optional<ButtonType> result = dialog.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
 			controller.updateGoal(goal);
+			System.out.println(goal.getPriority());
+			DailyData.getInstance().updateGoal(goal);
 		}
 	}
 	/*
@@ -575,19 +580,46 @@ public class Controller {
 		priorityCol.setOnEditCommit(new EventHandler<CellEditEvent<Goal, String>>() {
 			@Override
 			public void handle(CellEditEvent<Goal, String> t) {
-				((Goal) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPriority(t.getNewValue());
+				Goal selectedGoal = ((Goal) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+				selectedGoal.setPriority(t.getNewValue());
+				System.out.println("ooooooooooooooo");
+				//DailyData.getInstance().updateGoal(selectedGoal);
 			}
 		});
 		priorityCol.setMaxWidth(75);
 		priorityCol.setMinWidth(75);
 
-		TableColumn<Goal, String> achievedCol = new TableColumn<>("Achieved");
-		achievedCol.setCellValueFactory(new PropertyValueFactory<Goal, String>("achieved"));
+		TableColumn<Goal, Boolean> achievedCol = new TableColumn<>("Achieved"); //setOnEditCommit does not work with checkboxtablecell
+		achievedCol.setCellValueFactory(new PropertyValueFactory<Goal, Boolean>("checkedOff"));
 		achievedCol.setPrefWidth(100);
 		achievedCol.setMinWidth(100);
 		achievedCol.setMaxWidth(150);
-		achievedCol.setStyle("-fx-alignment: CENTER;"); // places the checkbox in
+		//achievedCol.setStyle("-fx-alignment: CENTER;"); // places the checkbox in
 		// the center of the column
+		//achievedCol.setCellFactory(CheckBoxTableCell.forTableColumn(achievedCol);
+		achievedCol.setCellFactory(tc -> {
+			CheckBox checkBox = new CheckBox();
+			TableCell<Goal, Boolean> cell = new TableCell<Goal, Boolean>(){
+				@Override
+				public void updateItem(Boolean item, boolean empty) {
+					if(empty) {
+						setGraphic(null);
+					}else {
+						checkBox.setSelected(item);
+						setGraphic(checkBox);
+					}
+				}
+			};
+			checkBox.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
+				Goal goal = (Goal)cell.getTableRow().getItem();
+				goal.setCheckedOff(isSelected);
+				System.out.println(goal.getCheckedOff());
+				DailyData.getInstance().updateGoal(goal);
+			});		
+			cell.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			cell.setAlignment(Pos.CENTER);
+			return cell;
+		});
 
 		TableColumn<Goal, String> descriptionCol = new TableColumn<>("Description");
 		descriptionCol.setCellFactory(tc -> {
@@ -668,13 +700,12 @@ public class Controller {
 		gridPane.setPadding(new Insets(5));
 		gridPane.setVgap(5);
 
-		taskBox.setHgrow(eventTF, Priority.ALWAYS); // this will take up all possible space when the program is
+		taskBox.setHgrow(eventTF, Priority.ALWAYS); // this will take up all possible space when the program is maximized to full screen
 		taskBox.setHgrow(hourTF1, Priority.ALWAYS);
 		taskBox.setHgrow(hourTF2, Priority.ALWAYS);
 		taskBox.setHgrow(minuteTF1, Priority.ALWAYS);
 		taskBox.setHgrow(minuteTF2, Priority.ALWAYS);
 
-		// maximized to full screen
 		taskBox.getChildren().addAll(hourTF1, new Label(":"), minuteTF1, oneCB, new Label(" - "), hourTF2,
 				new Label(":"), minuteTF2, twoCB); // how to add elements to a hbox
 		taskBox2.getChildren().addAll(eventTF, addTask, deleteTask);

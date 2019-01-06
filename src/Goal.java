@@ -1,24 +1,58 @@
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.CheckBox;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.UUID;
 
 public class Goal implements Serializable, Comparable {
 
+	private String uniqueID;
 	private SimpleStringProperty priority = new SimpleStringProperty("");
 	private SimpleStringProperty description = new SimpleStringProperty("");
 	private SimpleStringProperty duration = new SimpleStringProperty("");
+	private SimpleBooleanProperty checkedOff = new SimpleBooleanProperty(false);
+	private LocalDate date;
 
 	private StringFunctions stringFunctions = new StringFunctions();
 
-	private CheckBox achieved;
-
-	public Goal(String description, String priority, String duration) {
+	public Goal(String description, String priority, Boolean checkedOff, String duration, LocalDate date, String id) {
+		if(id.equals("")) {
+			uniqueID = UUID.randomUUID().toString();
+		}else {
+			uniqueID = id;
+		}
 		this.description.set(description);
-		this.achieved = new CheckBox();
+		this.checkedOff.set(checkedOff);
 		setPriority(priority);
 		this.duration.set(duration);
+		this.date = date;
+	}
+	
+	public String getID() {
+		return uniqueID;
+	}
+	
+	public boolean getCheckedOff() {
+		return checkedOff.get();
+	}
+
+	public SimpleBooleanProperty checkedOffProperty() {
+		return checkedOff;
+	}
+
+	public void setCheckedOff(Boolean checkedOff) {
+		this.checkedOff.set(checkedOff);
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 	public String getDescription() {
@@ -32,14 +66,6 @@ public class Goal implements Serializable, Comparable {
 
 	public void setDescription(String description) {
 		this.description.set(description);
-	}
-
-	public CheckBox isAchieved() {
-		return achieved;
-	}
-
-	public void setAchieved(CheckBox achieved) {
-		this.achieved = achieved;
 	}
 
 	public SimpleStringProperty priorityProperty() {

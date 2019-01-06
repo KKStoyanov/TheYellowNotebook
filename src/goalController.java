@@ -1,6 +1,7 @@
 
+import java.time.LocalDate;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class goalController {
@@ -22,7 +23,7 @@ public class goalController {
    
    private StringFunctions sFunctions = new StringFunctions();
 
-    public Goal processResults(){
+    public Goal processResults(LocalDate date){
     	String priority = priorityTF.getText();
         String description = goalTA.getText();
        
@@ -32,7 +33,7 @@ public class goalController {
 		String duration = sFunctions.stringForDuration(hour, minute, second);
 
 
-        Goal goal = new Goal(description, priority, duration);
+        Goal goal = new Goal(description, priority, false, duration, date, "");
         return goal;
     }
     
@@ -59,6 +60,5 @@ public class goalController {
 		String minute = sFunctions.editString(minuteTF.getText());
 		String second = sFunctions.editString(secondTF.getText());
 		goal.setDuration(sFunctions.stringForDuration(hour, minute, second));
-
     }
 }
