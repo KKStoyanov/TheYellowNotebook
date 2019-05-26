@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections ?>
+<?import javafx.geometry.*?>
+
+<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+	fx:controller="controllers.goalController" prefHeight="400.0" prefWidth="600.0">
+	<headerText>
+		Add Goal
+	</headerText>
+	<content>
+		<GridPane hgap="10" vgap="10">
+			<padding>
+				<Insets top="25" right="25" bottom="10" left="25" />
+			</padding>
+			<Label text="Priority: " GridPane.rowIndex="0"
+				GridPane.columnIndex="0" />
+			<TextField fx:id="priorityTF" GridPane.rowIndex="0"
+				GridPane.columnIndex="1" prefWidth="50.0" maxWidth="50.0" />
+			<Label text="Description: " GridPane.rowIndex="1"
+				GridPane.columnIndex="0" />
+			<TextField fx:id="goalTA" prefWidth="300.0"
+				GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="4" />
+			<Label text="Duration: " GridPane.rowIndex="2"
+				GridPane.columnIndex="0" />
+			<HBox GridPane.rowIndex="2" GridPane.columnIndex="1"
+				GridPane.columnSpan="2">
+				<TextField fx:id="hourTF" promptText="Hour" />
+				<Label text=":" />
+				<TextField fx:id="minuteTF" promptText="Minute" />
+				<Label text=":" />
+				<TextField fx:id="secondTF" promptText="Second" />
+			</HBox>
+		</GridPane>
+
+	</content>
+
+</DialogPane>
